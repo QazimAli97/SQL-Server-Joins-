@@ -1,0 +1,70 @@
+create database Supermart
+
+use Supermart
+select * from [Customer (1)]
+select * from [dbo].[Product (1)]
+select * from [Sales (1)]
+
+--1)
+select Order_ID,Customer_Name,Product_Name from [Sales (1)] s
+inner join  [Customer (1)] c
+on s.Customer_ID = c.Customer_ID
+inner join [Product (1)] p
+on p.Product_ID = s.Product_ID
+
+--2)
+select Customer_Name,Product_Name, Region from [Sales (1)] s
+inner join [Customer (1)] c
+on s.Customer_ID = c.Customer_ID
+inner join [Product (1)] p
+on p.Product_ID = s.Product_ID
+where Region = 'East'
+
+--3)
+select Order_ID,Customer_Name,Product_Name,Sales,Profit 
+from [Sales (1)] s
+inner join [Customer (1)] c
+on s.Customer_ID = c.Customer_ID
+inner join [Product (1)] p
+on p.Product_ID = s.Product_ID
+
+--4)
+select Order_ID,Customer_Name,Product_Name from [Sales (1)] s
+inner join  [Customer (1)] c
+on s.Customer_ID = c.Customer_ID
+inner join [Product (1)] p
+on p.Product_ID = s.Product_ID
+where Quantity < 1
+
+
+--5)
+select Region,sum(sales)[Total Sales],sum(profit)[Total Profit]
+from [Sales (1)]
+left join [Customer (1)]
+on [Customer (1)].Customer_ID = [Sales (1)].Customer_ID
+group by Region
+
+--6)
+
+select top 5(Customer_Name),sum(sales)[Total sales amount]
+from [Customer (1)] c
+inner join [Sales (1)] s
+on c.Customer_ID = s.Customer_ID
+group by Customer_Name
+order by [Total sales amount] desc
+
+select * from [Customer (1)]
+select * from [dbo].[Product (1)]
+select * from [Sales (1)]
+
+--7)
+
+select y.Customer_Name,x.City 
+from [Customer (1)] x
+join [Customer (1)] y
+on x.City = y.City
+y.Customer_Name<>x.City 
+
+--8)
+
+
